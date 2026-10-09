@@ -1,4 +1,6 @@
-from testops.domain.models import QualityPolicy, TestResult as Result, TestStatus as Status
+from testops.domain.models import QualityPolicy
+from testops.domain.models import TestResult as Result
+from testops.domain.models import TestStatus as Status
 from testops.domain.services import QualityGate
 
 
