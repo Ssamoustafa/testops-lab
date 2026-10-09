@@ -79,7 +79,3 @@ The repository is intentionally evolvable. Strong next increments are JUnit/Allu
 
 See [`docs/architecture.md`](docs/architecture.md) and the ADRs under [`docs/adr`](docs/adr).
 
-## Portfolio positioning
-
-**Atlas Test Framework:** "I can architect test automation."  
-**TestOps Lab:** "I can architect the engineering system that governs test evidence and release confidence."
