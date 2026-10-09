@@ -56,12 +56,40 @@ class QualityGate:
         return tuple(sorted(test_id for test_id, seen in statuses.items() if len(seen) > 1))
 
     @staticmethod
-    def _violations(metrics: QualityMetrics, policy: QualityPolicy) -> tuple[GateViolation, ...]:
+    def _violations(
+        metrics: QualityMetrics,
+        policy: QualityPolicy,
+    ) -> tuple[GateViolation, ...]:
         violations: list[GateViolation] = []
+
         if metrics.failure_rate > policy.max_failure_rate:
-            violations.append(GateViolation("failure_rate", f"{metrics.failure_rate:.2%}", f"<= {policy.max_failure_rate:.2%}"))
+            violations.append(
+                GateViolation(
+                    "failure_rate",
+                    f"{metrics.failure_rate:.2%}",
+                    f"<= {policy.max_failure_rate:.2%}",
+                )
+            )
+
         if len(metrics.flaky_tests) > policy.max_flaky_tests:
-            violations.append(GateViolation("flaky_tests", str(len(metrics.flaky_tests)), f"<= {policy.max_flaky_tests}"))
-        if policy.max_p95_duration_ms is not None and metrics.p95_duration_ms > policy.max_p95_duration_ms:
-            violations.append(GateViolation("p95_duration_ms", str(metrics.p95_duration_ms), f"<= {policy.max_p95_duration_ms}"))
+            violations.append(
+                GateViolation(
+                    "flaky_tests",
+                    str(len(metrics.flaky_tests)),
+                    f"<= {policy.max_flaky_tests}",
+                )
+            )
+
+        if (
+            policy.max_p95_duration_ms is not None
+            and metrics.p95_duration_ms > policy.max_p95_duration_ms
+        ):
+            violations.append(
+                GateViolation(
+                    "p95_duration_ms",
+                    str(metrics.p95_duration_ms),
+                    f"<= {policy.max_p95_duration_ms}",
+                )
+            )
+
         return tuple(violations)
