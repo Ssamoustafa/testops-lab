@@ -1,0 +1,5 @@
+[
+  {"test_id": "checkout::happy_path", "status": "passed", "duration_ms": 820, "suite": "e2e"},
+  {"test_id": "users::create", "status": "passed", "duration_ms": 115, "suite": "api"},
+  {"test_id": "catalog::search", "status": "passed", "duration_ms": 240, "suite": "api"}
+]
